@@ -96,4 +96,10 @@ class ProjectPolicy
     {
         //
     }
+
+    public function upload(User $user, Project $project)
+    {
+        // view corresponds to show method
+        return $user->id === $project->user_id;
+    }
 }

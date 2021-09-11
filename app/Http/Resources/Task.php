@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Resources;
-use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resource\Task as TaskResource;
 
-class Project extends JsonResource
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class Task extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,8 @@ class Project extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->image_path,
-            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
-            'tasks_count' => $this->when(!is_null($this->tasks_count), $this->tasks_count),
+            'due_date' => $this->due_date,
+            'priority' => $this->priority,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
@@ -29,7 +28,7 @@ class Project extends JsonResource
     public function with($request)
     {
         return [
-            'status' => 'OK'
+            'status' => 'ok'
         ];
     }
 }
